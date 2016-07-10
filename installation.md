@@ -24,4 +24,4 @@
 ## Maintenance
 * go to the folder that contains the vagrantfile and isue `vagrant plugin install vagrant-vbguest`
 * see this [blog](http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/) for details.
-* Nach einem `vagrant destroy`  ist zunächst der config.ssh.private_key_path wieder zu aktivieren, weil man nach einem destroy ein neues, anderes keyfile erhält.
+* Nach einem `vagrant destroy`  ist zunächst der config.ssh.private_key_path wieder zu aktivieren, weil man nach einem destroy ein neues, anderes keyfile erhält. 
