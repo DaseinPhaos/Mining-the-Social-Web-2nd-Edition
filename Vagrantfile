@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     #override.vm.box = "precise64"
     override.vm.box = "ubuntu/trusty64"
     #override.vm.box_url = "http://files.vagrantup.com/precise64.box"
-    config.ssh.private_key_path = "/Users/rupertrebentisch/certificates/private_key"
+    #config.ssh.private_key_path = "/Users/rupertrebentisch/certificates/private_key"
     #config.ssh.insert_key = false
     # Port forwarding details
 
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
 
     # You can increase the default amount of memory used by your VM by
     # adjusting this value below (in MB) and reprovisioning.
-    vb.customize ["modifyvm", :id, "--memory", "384"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
 
   #########################################################################
