@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|
 
   # Chef-Solo provisioning
   config.vm.provision :chef_solo do |chef|
-    chef.log_level = :debug
+#    chef.log_level = :debug
     chef.cookbooks_path = "deploy/cookbooks"
     chef.json = {
       :answer => "42",

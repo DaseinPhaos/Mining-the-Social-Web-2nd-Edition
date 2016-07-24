@@ -1,94 +1,66 @@
-Mining the Social Web (2nd Edition)
-=================================
+Fork from Mining the Social Web (2nd Edition)
+=============================================
 
 ## Summary
 
-_Mining the Social Web, 2nd Edition_ is available through O'Reilly Media, Amazon, and other fine book retailers. [Purchasing the ebook directly from O'Reilly](http://bit.ly/135dHfs) offers a number of great benefits, including a variety of digital formats and continual updates to the text of book for life! Better yet, if you choose to use O'Reilly's DropBox or Google Drive synchronization, your ebooks will automatically update every time there's an update. In other words, you'll always have the latest version of the book if you purchase the ebook through O'Reilly, which is why it's the recommended option in comparison to a paper copy or other electronic version. (If you prefer a [paperback or Kindle version from Amazon](http://amzn.to/GPd59m), that's a fine option as well.)
+This is a fork of the repository of iPython notebooks from the book "Mining the Social Web".
 
-There's an incredible turn-key virtual machine experience for this second edition of the book that provides you with a powerful social web mining toolbox. This toolbox provides the ability to explore and run all of the source code in a hassle-free manner. All that you have to do is [follow a few simple steps](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/_Appendix A - Virtual Machine Experience.html) to get the virtual machine installed, and you'll be running the example code in as little as 20-30 minutes. (And by the way, most of that time is waiting for files to download.)
+This fork is aimed to upgrade the vagrant based development environment so that it is working with current versions of Windows and OSX.
 
-This [short screencast](https://vimeo.com/72383764) demonstrates the steps involved in installing the virtual machine, which installs every single dependency for you automatically and save you a lot of time. Even sophisticated power users tend to prefer using it versus using their own environments.
+## Why a fork is necessary
 
-If you experience any problems at all with installation of the virtual machine, file an issue here on GitHub. Be sure to also follow [@SocialWebMining](http://twitter.com/socialwebmining) on Twitter and like http://facebook.com/MiningTheSocialWeb on Facebook.
+The book comes with a vagrant based development environment, available via github. This is great to get new users started. However Unfortunately the toolchain is outdated, which lead to a couple of problems:
 
-Be sure to also visit http://MiningTheSocialWeb.com for additional content, news, and updates about the book and code in this GitHub repository.
+1. The vagrant file will only work with VirtualBox 1.3. This is a problem, because the current version (and default download) is now 1.5. On OSX VirtualBox will not install in version 1.3, due to security reasons.
+2. The VirtualBox is based on ubuntu 12 with a couple of issues when you try to install newer software packages.
+3. Some of the python modules won't install. As all python modules are installed via `pip install -r ...` a fatal error in one of the installs will lead to a situation were all modules have to be reinstalled by chef.
+4. A lot of deprecated options in the installs, deprecated chef recipes (especially for python) and iPython is now jupyter.
 
-## Preview the Full-Text of Chapter 1 (Mining Twitter)
+So it is time to brush things up
 
-Chapter 1 of the book provides a gentle introduction to hacking on Twitter data. It's available in a variety of convenient formats
+## Status
 
-* A free [PDF download](http://bit.ly/135dHfs)
-* An [online ebook](http://bit.ly/1an184a) excerpt
-* An [IPython Notebook (ipynb) file](http://bit.ly/1aIXjFf)  (checked into this repository)
+Everything now installs properly with exception of Matplotlib. So the iPython notebooks are usable on Windows.
 
-Choose one, or choose them all. There's no better way to get started than following along with the opening chapter.
+## Some tips and tricks to deal with disk space
 
-## Preview the IPython Notebooks
+### Move away from the primary disk
+On my Windows 7 mashine the VMBox takes up about 1.5 to 5 GB of diskspace, vagrant uses around 750 MB. As I have a SSD as my first disk, I need to move this to my secondary disk.
+To achieve this:
+1. Create a new directory on your target disk. Set the VAGRANT_HOME environment variable to point to this directory. On Windows go to explorer (right click) -> "Erweiterte Systemeinstellungen" -> "Umgebungsvariablen".
+2. Create a different new directory on your target disk for your VirtualBox. Open the VirtualBox app. In the settings, specify this directory to store the VirtualBox-files.
 
-This edition of _Mining the Social Web_ extensively uses [IPython Notebook](http://ipython.org/notebook.html) to facilitate the learning and development process. If you're interested in what the example code for any particular chapter does, the best way to preview it is with the links below. When you're ready to develop, pull the source for this GitHub repository and follow the instructions for installing the virtual machine to get started.
-
-A bit.ly bundle of all of these links is also available: http://bit.ly/mtsw2e-ipynb
-
-* [Chapter 0 - Preface](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 0 - Preface.html)
-* [Chapter 1 - Mining Twitter: Exploring Trending Topics, Discovering What People Are Talking About, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 1 - Mining Twitter.html)
-* [Chapter 2 - Mining Facebook: Analyzing Fan Pages, Examining Friendships, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 2 - Mining Facebook.html)
-* [Chapter 3 - Mining LinkedIn: Faceting Job Titles, Clustering Colleagues, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 3 - Mining LinkedIn.html)
-* [Chapter 4 - Mining Google+: Computing Document Similarity, Extracting Collocations, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 4 - Mining Google+.html)
-* [Chapter 5 - Mining Web Pages: Using Natural Language Processing to Understand Human Language, Summarize Blog Posts and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 5 - Mining Web Pages.html)
-* [Chapter 6 - Mining Mailboxes: Analyzing Who's Talking To Whom About What, How Often, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 6 - Mining Mailboxes.html)
-* [Chapter 7 - Mining GitHub: Inspecting Software Collaboration Habits, Building Interest Graphs, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 7 - Mining GitHub.html)
-* [Chapter 8 - Mining the Semantically Marked-Up Web: Extracting Microformats, Inferencing Over RDF, and More](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 8 - Mining the Semantically Marked-Up Web.html)
-* [Chapter 9 - Twitter Cookbook](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/Chapter 9 - Twitter Cookbook.html)
-* [Appendix A - Virtual Machine Experience](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/_Appendix A - Virtual Machine Experience.html)
-* [Appendix B - OAuth Primer](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/_Appendix B - OAuth Primer.html)
-* [Appendix C - Python & IPython Notebook Tips](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/_Appendix C - Python & IPython Notebook Tips.html)
-
-## Blog & Screencasts
-
-Be sure to bookmark the [Mining the Social Web Vimeo Channel]() to stay up to date with short instructional videos that demonstrate how to use the tools in this repository. More screencasts are being added all the time, so check back often -- or better yet, subscribe to the channel. 
-
-<p align="center">
-<a href="https://vimeo.com/channels/MiningTheSocialWeb" target="_blank"><img src="https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/raw/master/images/screencast-installing-vm.png"
-alt="Installing the Virtual Machine" width="50%" height="50%" border="10" /></a><br />
-<em>A ~3 minute screencast on installing a powerful toolbox for social web mining.<br />
-View a collection of all available screencasts at http://bit.ly/mtsw2e-screencasts</em>
-</p>
-
-You might also benefit from the content that is being regularly added to the companion blog at http://MiningTheSocialWeb.com
-
-## The _Mining the Social Web_ Virtual Machine
-
-_You may enjoy [this short screencast](https://vimeo.com/72383764) that demonstrates the step-by-step instructions involved in installing the book's virtual machine._
-
-The code for _Mining the Social Web_ is organized by chapter in an [IPython Notebook](http://ipython.org/notebook.html) format to maximize enjoyment of following along with examples as part of an interactive experience. Unfortunately, some of the Python dependencies for the example code can be a little bit tricky to get installed and configured, so providing a completely turn-key virtual machine to make your reading experience as simple and enjoyable as possible is in order. Even if you are a seasoned developer, you may still find some value in using this virtual machine to get started and save yourself some time. The virtual machine is powered with [Vagrant](http://vagrantup.com/), an amazing development tool that you'll probably want to know about and arguably makes working with virtualization even easier than a native [Virtualbox](http://www.virtualbox.org/) or VMWare image.  
-
-## Quick Start Guide
-
-The recommended way of getting started with the example code is by taking advantage of the Vagrant-powered virtual machine as illusrated in [this short screencast](https://www.youtube.com/watch?v=BTyKPMfi_JQ). After all, you're more interested in following along and learning from the examples than installing and managing all of the system dependencies just to get to that point, right? 
-
-[Appendix A - Virtual Machine Experience](https://rawgithub.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/master/ipynb/html/_Appendix A - Virtual Machine Experience.html) provides clear step-by-step instructions for installing the virtual machine and is intended to serve as a quick start guide.
+### Move VirtualBox to a flash-drive
+On my MacBook I need to have ghe VirtualBox on a flash-drive. This leads however to some obstacles: vagrant will not be able to provision the virtual mashine, because the certificate to log in to the virtual box is fully accessible. For security reasons ssl
+will not accept a fully accessible certificate, so vagrant can not log in to its created guest machine.
+So after using `vagrant up` to download and install the virtual machine (takes 20 min) there might be an error with the permissions on the private-key file for the ssh to the virtual machine. In this case do the following:
+  * let us assume that /project is the folder where the vagrant file lives.
+  * So then goto /project/.vagrant/mashines/default/virtualtbox and copy the file to a local folder /home folder (let us assume /Users/username/certificates/), where you can change the file permissions via `chmod 0600 key_file`
+  * now set the vagrant system to find the file in this folder:
+  * open the vagrant file and add the last line below the two lines (so this block look as follows:)
+  ```sh
+  override.vm.box = "precise64"
+  override.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.ssh.private_key_path = "/Users/username/certificates/private_key"
+  ```
+  * After using `vagrant destroy`  you first have to deactivate config.ssh.private_key_path again in the Vagrantfile, because the next `vagrant up` will create a new guest virtual machine, with a new and different certificate.
 
 
-## The _Mining the Social Web_ Wiki
+  ## Install of vagrant and virtual box
+  * install [virtual box](https://www.virtualbox.org/wiki/Downloads). The target directory is fixed Unfortunately (Mac).
+  * install [vargrant](https://www.vagrantup.com/downloads.html). The can be changed to point to a flash drive (Mac).
+  * install git client for Windows. Do check (it's guarded by a warining) the git and bash command linen tools. Otherwise `vagrant ssh` will not work at all (Windows). Alternatively you could use putty to login to your guest machine.
+  ![How to download the git unix tools](images/HowToDownloadGitUnixTools.png)
+  * clone the github repo from [GitHub](https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/)
 
-This project takes advantage of its GitHub repository's [wiki](https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/wiki) to act as a point of collaboration for consumers of the source code. Feel free to use the wiki however you'd like to share your experiences, and create additional pages as needed to curate additional information.
+  ## Use some basic vagrant commands
+  * Use `vagrant up` to download and install the guest machine (also use this to bring the virtual machine up after halt or suspend)
+  * Use `vagrant status` to check whether the vagrant machine is up and running.
+  * you might have to update via `vagrant box update`
+  * start and stop vagrant via `vagrant up` and `vagrant halt` (do not use `vagrant suspend` in most cases)
+  * use `vagrant provision` to start the provisioning of the machine. In our case this will start the chef machinery to install the python environment. You can restart this command.
+  * Use `vagrant destory` if you have to restart completly from scratch or have to reuse the disk space.
 
-One of the more important wiki pages that you may want to bookmark is the [Advisories](https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/wiki/Advisories) page, which is an archive of notes about particularly disruptive commits or other changes that may affect you.
-
-Another page of interest is a listing of all [100+ numbered examples](https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition/wiki/Numbered-Examples) from the book that conveniently hyperlink to read-only version of the IPython Notebooks
-
-## "Premium Support"
-
-The source code in this repository is free for your use however you'd like. If you'd like to complete a more rigorous study about social web mining much like you would experience by following along with a textbook in a classroom, however, you should consider picking up a copy of [Mining the Social Web](http://bit.ly/135dHfs) and follow along. _Think of the book as offering a form of "premium support" for this open source project._ 
-
-The publisher's description of the book follows for your convenience:
-
-How can you tap into the wealth of social web data to discover who’s making connections with whom, what they’re talking about, and where they’re located? With this expanded and thoroughly revised edition, you’ll learn how to acquire, analyze, and summarize data from all corners of the social web including Facebook, Twitter, LinkedIn, Google+, GitHub, email, websites, and blogs. 
-
-* Employ IPython Notebook, the Natural Language Toolkit, NetworkX, and other scientific computing tools to mine popular social web sites
-* Apply advanced text-mining techniques, such as clustering and TF-IDF, to extract meaning from human language data
-* Bootstrap interest graphs from GitHub by discovering affinities among people, programming languages, and coding projects
-* Build interactive visualizations with D3.js, a state-of-the-art HTML5 and JavaScript toolkit 
-* Take advantage of more than two-dozen Twitter recipes presented in O’Reilly’s popular and well-known cookbook format
-
-The example code for this data science book is maintained in a public GitHub repository and is designed to be especially accessible through a turn-key virtual machine that facilitates interactive learning with an easy-to-use collection of IPython Notebooks. 
+  ## Maintenance
+  * go to the folder that contains the vagrantfile and isue `vagrant plugin install vagrant-vbguest`
+  * see this [blog](http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/) for details.
